@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Suggest-a-Poem</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="container">
+      <fieldset>
+        <form action="/" method="post">
+          <input name="feeling" type="text" id="feeling" class="ghost-input" placeholder="How are you feeling?" required>
+          <input type="submit" class="ghost-button" value="Get a Poem">
+          <script>
+            var content = $("input#feeling").val()
+            var words = content.trim().split(/\s+/);
+            var numWords = words.length;
+            if (numWords > 1) {
+              return false;
+            }
+          </script>
+        </form>
+        <% if(poemTitle !== null){ %>
+          <h2 id=title><%= poemTitle %></h2>
+          <div id="author"><%= poemAuthor %></div>
+        <% for(var i=0; i < poemLines.length; i++) {%>          
+          <div><%= poemLines[i] -%></div> <% } %>
+        <% } %>
+
+        <% if(error !== null){ %>
+          <p><%= error %></p>
+        <% } %>        
+      </fieldset>
+    </div>
+  </body>
+</html> 
