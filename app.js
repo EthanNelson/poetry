@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 5000
 
 var app = express()
 
@@ -8,8 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
-var port = "1000";
-app.set('port', port);
+// var port = "1000";
+// app.set('port', port);
 
 app.get('/', function (req, res) {
   res.render('index', {poemTitle: null, poemAuthor: null, poemLines: null, error: null});
@@ -31,6 +32,6 @@ app.post('/', function (req, res) {
 	    }
 	  });
 })
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+app.listen(port, "0.0.0.0", function() {
+
+
