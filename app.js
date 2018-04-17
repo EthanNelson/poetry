@@ -1,7 +1,6 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 5000
 
 var app = express()
 
@@ -9,8 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
-// var port = "1000";
-// app.set('port', port);
+
+const hostname = '127.0.0.1';
+const port = 3000;
 
 app.get('/', function (req, res) {
   res.render('index', {poemTitle: null, poemAuthor: null, poemLines: null, error: null});
@@ -22,7 +22,7 @@ app.post('/', function (req, res) {
 
 	request(url, function (err, response, body) {
 	    if (err) {
-	      res.render('index', {poem: null, error: 'please try again'});
+	      res.render('index', {poem: null, error: ' please try again'});
 	    } 
 	    else {
 	      let poem = JSON.parse(body);
@@ -32,6 +32,6 @@ app.post('/', function (req, res) {
 	    }
 	  });
 })
-app.listen(port, "0.0.0.0", function() {
-
-
+app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
